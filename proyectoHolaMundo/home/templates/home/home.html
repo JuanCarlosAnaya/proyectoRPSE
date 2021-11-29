@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISI página principal</title>
+
+    <!-- <style>
+        table{
+            width:50%;
+        }
+
+        td{
+            border:2px solid black;
+        }
+    </style> -->
+
+</head>
+<body>
+    <ul>
+
+        <li><a href="{% url 'home'  %}">home</a></li>
+        <li><a href="{% url 'sintactico:patrones'  %}">sintactico</a></li>
+        <li><a href="{% url 'about:about'  %}">about</a></li>
+        <li><a href="{% url 'grafo:grafo' %}">grafo</a></li>
+    </ul>
+    
+<form action="{% url 'grafo:procesamiento' %}" method="GET">
+    {%csrf_token%}
+    <label for="umbral">umbral</label>
+    <input type="text" name="umbral" id="umbral">
+
+    <button type="submit" name="miboton" > Iniciar Procedimiento</button>
+</form>
+
+
+{% block contenido %}
+
+      <img src="https://picsum.photos/id/870/200/300?grayscale&blur=2" alt="">
+
+{% endblock contenido %}    
+
+{% for l in mislistas %}
+  
+
+
+<ul>
+
+{{otra}}
+
+<table>
+    <thead>
+        <tr>
+            <!-- <td>Temp.</td>
+            <td>Color</td>
+            <td>Inflamacion.</td> -->
+            <td>pk</td>
+            <td>T</td>
+            <td>C</td>
+            <td>I</td>
+
+        </tr>
+    </thead>
+
+    <tbody>
+            {% for elemento in l %}
+            <tr>
+                <td style="border: 2px solid black;"><a href="">
+                    {{elemento.pk}}
+                </a></td>
+
+                
+                {% if elemento.temperature < 20 %}
+                <td style="border: 2px solid black;">{{elemento.temperature}}</td>
+
+                {% else %}
+
+                <td style="border: 2px solid red;">{{elemento.temperature}}</td>
+                {% endif %}
+                    
+                
+
+
+
+                <td style="border: 2px solid black;">{{elemento.color}}</td>        
+                <td style="border: 2px solid black;">{{elemento.inflammation}}</td>
+            </tr>
+  
+            {% endfor %}  
+
+    </tbody>
+
+</table>
+
+       
+</ul>
+{% endfor %}
+
+<hr> 
+{% block footer %}
+<p>inicio</p> 
+{% endblock footer %}
+
+
+</body>
+</html>
